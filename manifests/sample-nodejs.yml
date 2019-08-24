@@ -78,6 +78,7 @@ items:
       metadata:
         annotations:
           openshift.io/generated-by: OpenShiftNewApp
+          sidecar.istio.io/inject: 'true'
         creationTimestamp: null
         labels:
           app: sample-nodejs
