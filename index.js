@@ -18,6 +18,10 @@ app.get('/', (req, res) => {
     res.send('Simple REST API');
 });
 
+app.get('/sample-nodejs', (req, res) => {
+    res.send('Sample Node.js Application!!');
+});
+
 const courses = [
     { id: 1, name: 'computer science'},
     { id: 2, name: 'information technology'},
