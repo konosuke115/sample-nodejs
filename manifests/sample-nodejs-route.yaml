@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: sample-nodejs
+spec:
+  host: sample-nodejs.apps.example.com
+  #path:
+  to:
+   kind: Service
+   name: sample-nodejs
