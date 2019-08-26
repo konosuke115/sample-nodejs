@@ -1,0 +1,624 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: apple
+    name: apple
+  name: apple
+spec:
+  replicas: 1
+  selector:
+    app: apple
+    deploymentconfig: apple
+    name: apple
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        sidecar.istio.io/inject: 'true'
+      creationTimestamp: null
+      labels:
+        app: apple
+        deploymentconfig: apple
+        name: apple
+    spec:
+      containers:
+      - image: sample-nodejs:latest
+        name: apple
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - apple
+      from:
+        kind: ImageStreamTag
+        name: sample-nodejs:latest
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: apple
+    name: apple
+  name: apple
+spec:
+  ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: apple
+    deploymentconfig: apple
+    name: apple
+status:
+  loadBalancer: {}
+  ---
+  apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: banana
+    name: banana
+  name: banana
+spec:
+  replicas: 1
+  selector:
+    app: banana
+    deploymentconfig: banana
+    name: banana
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        sidecar.istio.io/inject: 'true'
+      creationTimestamp: null
+      labels:
+        app: banana
+        deploymentconfig: banana
+        name: banana
+    spec:
+      containers:
+      - image: sample-nodejs:latest
+        name: banana
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - banana
+      from:
+        kind: ImageStreamTag
+        name: sample-nodejs:latest
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: banana
+    name: banana
+  name: banana
+spec:
+  ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: banana
+    deploymentconfig: banana
+    name: banana
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: grape
+    name: grape
+  name: grape
+spec:
+  replicas: 1
+  selector:
+    app: grape
+    deploymentconfig: grape
+    name: grape
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        sidecar.istio.io/inject: 'true'
+      creationTimestamp: null
+      labels:
+        app: grape
+        deploymentconfig: grape
+        name: grape
+    spec:
+      containers:
+      - image: sample-nodejs:latest
+        name: grape
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - grape
+      from:
+        kind: ImageStreamTag
+        name: sample-nodejs:latest
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: grape
+    name: grape
+  name: grape
+spec:
+  ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: grape
+    deploymentconfig: grape
+    name: grape
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: kiwi
+    name: kiwi
+  name: kiwi
+spec:
+  replicas: 1
+  selector:
+    app: kiwi
+    deploymentconfig: kiwi
+    name: kiwi
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        sidecar.istio.io/inject: 'true'
+      creationTimestamp: null
+      labels:
+        app: kiwi
+        deploymentconfig: kiwi
+        name: kiwi
+    spec:
+      containers:
+      - image: sample-nodejs:latest
+        name: kiwi
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - kiwi
+      from:
+        kind: ImageStreamTag
+        name: sample-nodejs:latest
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: kiwi
+    name: kiwi
+  name: kiwi
+spec:
+  ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: kiwi
+    deploymentconfig: kiwi
+    name: kiwi
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: peach
+    name: peach
+  name: peach
+spec:
+  replicas: 1
+  selector:
+    app: peach
+    deploymentconfig: peach
+    name: peach
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        sidecar.istio.io/inject: 'true'
+      creationTimestamp: null
+      labels:
+        app: peach
+        deploymentconfig: peach
+        name: peach
+    spec:
+      containers:
+      - image: sample-nodejs:latest
+        name: peach
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - peach
+      from:
+        kind: ImageStreamTag
+        name: sample-nodejs:latest
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: peach
+    name: peach
+  name: peach
+spec:
+  ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: peach
+    deploymentconfig: peach
+    name: peach
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: pear
+    name: pear
+  name: pear
+spec:
+  replicas: 1
+  selector:
+    app: pear
+    deploymentconfig: pear
+    name: pear
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        sidecar.istio.io/inject: 'true'
+      creationTimestamp: null
+      labels:
+        app: pear
+        deploymentconfig: pear
+        name: pear
+    spec:
+      containers:
+      - image: sample-nodejs:latest
+        name: pear
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - pear
+      from:
+        kind: ImageStreamTag
+        name: sample-nodejs:latest
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: pear
+    name: pear
+  name: pear
+spec:
+  ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: pear
+    deploymentconfig: pear
+    name: pear
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: pineapple
+    name: pineapple
+  name: pineapple
+spec:
+  replicas: 1
+  selector:
+    app: pineapple
+    deploymentconfig: pineapple
+    name: pineapple
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        sidecar.istio.io/inject: 'true'
+      creationTimestamp: null
+      labels:
+        app: pineapple
+        deploymentconfig: pineapple
+        name: pineapple
+    spec:
+      containers:
+      - image: sample-nodejs:latest
+        name: pineapple
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - pineapple
+      from:
+        kind: ImageStreamTag
+        name: sample-nodejs:latest
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: pineapple
+    name: pineapple
+  name: pineapple
+spec:
+  ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: pineapple
+    deploymentconfig: pineapple
+    name: pineapple
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: strawberry
+    name: strawberry
+  name: strawberry
+spec:
+  replicas: 1
+  selector:
+    app: strawberry
+    deploymentconfig: strawberry
+    name: strawberry
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        sidecar.istio.io/inject: 'true'
+      creationTimestamp: null
+      labels:
+        app: strawberry
+        deploymentconfig: strawberry
+        name: strawberry
+    spec:
+      containers:
+      - image: sample-nodejs:latest
+        name: strawberry
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - strawberry
+      from:
+        kind: ImageStreamTag
+        name: sample-nodejs:latest
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: strawberry
+    name: strawberry
+  name: strawberry
+spec:
+  ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: strawberry
+    deploymentconfig: strawberry
+    name: strawberry
+status:
+  loadBalancer: {}
