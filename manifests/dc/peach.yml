@@ -43,7 +43,7 @@ spec:
       - peach
       from:
         kind: ImageStreamTag
-        name: peach:latest
+        name: sample-nodejs:latest
     type: ImageChange
 status:
   availableReplicas: 0

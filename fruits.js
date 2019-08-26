@@ -17,6 +17,7 @@ var request = require('request');
 // hostnames = service names
 var hostnames = ["apple", "strawberry", "kiwi", "pear", "pineapple", "banana", "grape", "peach"]
 
+/*
 // GET ver params
 app.get('/fruits/:times', (req, res) => {
 
@@ -36,6 +37,7 @@ app.get('/fruits/:times', (req, res) => {
         res.send(req.hostname)
     }
 });
+*/
 
 // GET ver query
 app.get('/fruits', (req, res) => {

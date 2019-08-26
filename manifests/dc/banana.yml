@@ -43,7 +43,7 @@ spec:
       - banana
       from:
         kind: ImageStreamTag
-        name: banana:latest
+        name: sample-nodejs:latest
     type: ImageChange
 status:
   availableReplicas: 0

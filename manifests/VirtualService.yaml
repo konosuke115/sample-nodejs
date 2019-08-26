@@ -13,6 +13,6 @@ spec:
         exact: /fruits
       route:
         - destination:
-            host: fruits
+            host: sample-nodejs
             port:
               number: 3000

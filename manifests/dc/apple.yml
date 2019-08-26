@@ -43,7 +43,7 @@ spec:
       - apple
       from:
         kind: ImageStreamTag
-        name: apple:latest
+        name: sample-nodejs:latest
     type: ImageChange
 status:
   availableReplicas: 0

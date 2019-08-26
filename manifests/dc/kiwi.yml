@@ -44,7 +44,7 @@ spec:
       - kiwi
       from:
         kind: ImageStreamTag
-        name: kiwi:latest
+        name: sample-nodejs:latest
     type: ImageChange
 status:
   availableReplicas: 0

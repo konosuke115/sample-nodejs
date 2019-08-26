@@ -43,7 +43,7 @@ spec:
       - pineapple
       from:
         kind: ImageStreamTag
-        name: pineapple:latest
+        name: sample-nodejs:latest
     type: ImageChange
 status:
   availableReplicas: 0

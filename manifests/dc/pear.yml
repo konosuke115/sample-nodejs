@@ -43,7 +43,7 @@ spec:
       - pear
       from:
         kind: ImageStreamTag
-        name: pear:latest
+        name: sample-nodejs:latest
     type: ImageChange
 status:
   availableReplicas: 0

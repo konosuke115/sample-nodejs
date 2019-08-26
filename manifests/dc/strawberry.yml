@@ -43,7 +43,7 @@ spec:
       - strawberry
       from:
         kind: ImageStreamTag
-        name: strawberry:latest
+        name: sample-nodejs:latest
     type: ImageChange
 status:
   availableReplicas: 0
