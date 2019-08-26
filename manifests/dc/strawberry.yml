@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: strawberry
+    name: strawberry
+  name: strawberry
+spec:
+  replicas: 1
+  selector:
+    app: strawberry
+    deploymentconfig: strawberry
+    name: strawberry
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        sidecar.istio.io/inject: 'true'
+      creationTimestamp: null
+      labels:
+        app: strawberry
+        deploymentconfig: strawberry
+        name: strawberry
+    spec:
+      containers:
+      - image: sample-nodejs:latest
+        name: strawberry
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - strawberry
+      from:
+        kind: ImageStreamTag
+        name: strawberry:latest
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: strawberry
+    name: strawberry
+  name: strawberry
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: strawberry
+    deploymentconfig: strawberry
+    name: strawberry
+status:
+  loadBalancer: {}

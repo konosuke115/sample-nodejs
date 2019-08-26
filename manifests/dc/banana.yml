@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: banana
+    name: banana
+  name: banana
+spec:
+  replicas: 1
+  selector:
+    app: banana
+    deploymentconfig: banana
+    name: banana
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        sidecar.istio.io/inject: 'true'
+      creationTimestamp: null
+      labels:
+        app: banana
+        deploymentconfig: banana
+        name: banana
+    spec:
+      containers:
+      - image: sample-nodejs:latest
+        name: banana
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - banana
+      from:
+        kind: ImageStreamTag
+        name: banana:latest
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: banana
+    name: banana
+  name: banana
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: banana
+    deploymentconfig: banana
+    name: banana
+status:
+  loadBalancer: {}

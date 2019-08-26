@@ -14,6 +14,7 @@ app.listen(port, () => console.log(`Listening on port ${port}...`));
 // request base
 var request = require('request');
 
+// hostnames = service names
 var hostnames = ["apple", "strawberry", "kiwi", "pear", "pineapple", "banana", "grape", "peach"]
 
 // GET ver params

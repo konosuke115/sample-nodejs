@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: pear
+    name: pear
+  name: pear
+spec:
+  replicas: 1
+  selector:
+    app: pear
+    deploymentconfig: pear
+    name: pear
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        sidecar.istio.io/inject: 'true'
+      creationTimestamp: null
+      labels:
+        app: pear
+        deploymentconfig: pear
+        name: pear
+    spec:
+      containers:
+      - image: sample-nodejs:latest
+        name: pear
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - pear
+      from:
+        kind: ImageStreamTag
+        name: pear:latest
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: pear
+    name: pear
+  name: pear
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: pear
+    deploymentconfig: pear
+    name: pear
+status:
+  loadBalancer: {}

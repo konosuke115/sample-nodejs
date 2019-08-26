@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: grape
+    name: grape
+  name: grape
+spec:
+  replicas: 1
+  selector:
+    app: grape
+    deploymentconfig: grape
+    name: grape
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        sidecar.istio.io/inject: 'true'
+      creationTimestamp: null
+      labels:
+        app: grape
+        deploymentconfig: grape
+        name: grape
+    spec:
+      containers:
+      - image: sample-nodejs:latest
+        name: grape
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - grape
+      from:
+        kind: ImageStreamTag
+        name: grape:latest
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: grape
+    name: grape
+  name: grape
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: grape
+    deploymentconfig: grape
+    name: grape
+status:
+  loadBalancer: {}

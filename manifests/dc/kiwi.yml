@@ -1,0 +1,78 @@
+apiVersion: v1
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: kiwi
+    name: kiwi
+  name: kiwi
+spec:
+  replicas: 1
+  selector:
+    app: kiwi
+    deploymentconfig: kiwi
+    name: kiwi
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        sidecar.istio.io/inject: 'true'
+      creationTimestamp: null
+      labels:
+        app: kiwi
+        deploymentconfig: kiwi
+        name: kiwi
+    spec:
+      containers:
+      - image: sample-nodejs:latest
+        name: kiwi
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - kiwi
+      from:
+        kind: ImageStreamTag
+        name: kiwi:latest
+    type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: kiwi
+    name: kiwi
+  name: kiwi
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: kiwi
+    deploymentconfig: kiwi
+    name: kiwi
+status:
+  loadBalancer: {}
