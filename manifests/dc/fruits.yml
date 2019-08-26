@@ -75,8 +75,8 @@ spec:
     name: apple
 status:
   loadBalancer: {}
-  ---
-  apiVersion: v1
+---
+apiVersion: v1
 kind: DeploymentConfig
 metadata:
   annotations:

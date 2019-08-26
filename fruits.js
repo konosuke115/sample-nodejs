@@ -61,7 +61,7 @@ app.get('/fruits', (req, res) => {
     if (req.query.times > 1) {
 
         options = {
-            url: 'http://' + choose_at_random(hostnames) + '/fruits',
+            url: 'http://' + choose_at_random(hostnames) + ":3000" + '/fruits',
             qs: { "times": times, "count": count }
         }
         // http post request s
