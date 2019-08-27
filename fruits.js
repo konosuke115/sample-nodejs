@@ -47,7 +47,8 @@ app.get('/fruits', async (req, res) => {
         options = {
             url: 'http://' + choose_at_random(hostnames) + ":" + port + '/fruits',
             //url: 'http://localhost:' + port + '/fruits',
-            qs: { "times": times, "count": count }
+            qs: { "times": times, "count": count },
+            headers: headers
         }
 
         // http get request
