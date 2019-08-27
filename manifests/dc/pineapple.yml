@@ -31,7 +31,7 @@ spec:
       - image: sample-nodejs:latest
         name: pineapple
         ports:
-        - containerPort: 80
+        - containerPort: 3000
           protocol: TCP
         resources: {}
   test: false
@@ -66,9 +66,9 @@ metadata:
 spec:
   ports:
   - name: http
-    port: 80
+    port: 3000
     protocol: TCP
-    targetPort: 80
+    targetPort: 3000
   selector:
     app: pineapple
     deploymentconfig: pineapple

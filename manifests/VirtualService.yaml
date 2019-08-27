@@ -15,4 +15,4 @@ spec:
         - destination:
             host: sample-nodejs
             port:
-              number: 80
+              number: 3000
