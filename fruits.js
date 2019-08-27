@@ -131,15 +131,7 @@ async function get_forward_headers(req) {
 
     var headers = {};
     async.each(incoming_headers, (item, callback) => {
-
-        if (req.is(item)) {
-            headers[item] = req.get(item);
-            callback();
-        } else {
-            console.log("no header : " + item);
-            callback();
-        }
-
+        headers[item] = req.get(item);
     });
 
     console.log(headers);
