@@ -31,7 +31,7 @@ spec:
       - image: sample-nodejs:latest
         name: peach
         ports:
-        - containerPort: 3000
+        - containerPort: 80
           protocol: TCP
         resources: {}
   test: false
@@ -66,9 +66,9 @@ metadata:
 spec:
   ports:
   - name: http
-    port: 3000
+    port: 80
     protocol: TCP
-    targetPort: 3000
+    targetPort: 80
   selector:
     app: peach
     deploymentconfig: peach
