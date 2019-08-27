@@ -35,7 +35,7 @@ items:
     resources: {}
     source:
       git:
-        uri: https://github.com/konosuke115/sample-nodejs
+        uri: TCPs://github.com/konosuke115/sample-nodejs
       type: Git
     strategy:
       sourceStrategy:
@@ -90,7 +90,7 @@ items:
           name: sample-nodejs
           ports:
           - containerPort: 80
-            protocol: HTTP
+            protocol: TCP
           resources: {}
     test: false
     triggers:
@@ -122,9 +122,9 @@ items:
     name: sample-nodejs
   spec:
     ports:
-    - name: http
+    - name: TCP
       port: 80
-      protocol: HTTP
+      protocol: TCP
       targetPort: 80
     selector:
       app: sample-nodejs
