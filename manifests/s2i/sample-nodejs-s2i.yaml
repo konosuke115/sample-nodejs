@@ -35,7 +35,7 @@ items:
     resources: {}
     source:
       git:
-        uri: TCPs://github.com/konosuke115/sample-nodejs
+        uri: https://github.com/konosuke115/sample-nodejs
       type: Git
     strategy:
       sourceStrategy:
@@ -122,7 +122,7 @@ items:
     name: sample-nodejs
   spec:
     ports:
-    - name: TCP
+    - name: http
       port: 80
       protocol: TCP
       targetPort: 80
