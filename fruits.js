@@ -2,6 +2,10 @@
 const express = require('express');
 const app = express();
 
+// request base
+var request = require('request');
+var async = require('async');
+
 // request.body to json
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -11,11 +15,54 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
 
-// request base
-var request = require('request');
 
 // hostnames = service names
 var hostnames = ["apple", "strawberry", "kiwi", "pear", "pineapple", "banana", "grape", "peach"]
+
+// GET ver query
+app.get('/fruits', async (req, res) => {
+
+    //console.log("start");
+
+    headers = await get_forward_headers(req);
+
+    var times;
+    if (!req.query.times) {
+        res.send('no times query');
+    } else {
+        times = Number(req.query.times) - 1;
+    }
+
+    var count;
+    if (req.query.count) {
+        count = Number(req.query.count) + 1;
+        console.log(count);
+    } else {
+        count = 1
+        console.log(count);
+    }
+
+    if (req.query.times > 1) {
+
+        options = {
+            url: 'http://' + choose_at_random(hostnames) + ":" + port + '/fruits',
+            //url: 'http://localhost:' + port + '/fruits',
+            qs: { "times": times, "count": count }
+        }
+
+        // http get request
+        request.get(options, function (error, response, body) {
+            console.log(count + ": " + req.hostname);
+            res.send(count + ": " + req.hostname + "\n" + body);
+        })
+
+    } else {
+
+        console.log(req.hostname);
+        res.send(count + ": " + req.hostname)
+    }
+
+});
 
 /*
 // GET ver params
@@ -39,45 +86,7 @@ app.get('/fruits/:times', (req, res) => {
 });
 */
 
-// GET ver query
-app.get('/fruits', (req, res) => {
-
-    var times;
-    if (!req.query.times) {
-        res.send('no times query');
-    } else {
-        times = Number(req.query.times) - 1;
-    }
-    
-    var count;
-    if (req.query.count) {
-        count = Number(req.query.count) + 1;
-        console.log(count);
-    } else {
-        count = 1
-        console.log(count);
-    }
-
-    if (req.query.times > 1) {
-
-        options = {
-            url: 'http://' + choose_at_random(hostnames) + ":3000" + '/fruits',
-            qs: { "times": times, "count": count }
-        }
-        // http post request s
-        request.get(options, function (error, response, body) {
-            console.log(count + ": " + req.hostname);
-            res.send(count + ": " + req.hostname + "\n" + body);
-        })
-
-    } else {
-        
-        console.log(req.hostname);
-        res.send(count + ": " + req.hostname)
-    }
-
-});
-
+/*
 // Post 
 app.post('/fruits', (req, res) => {
 
@@ -102,6 +111,39 @@ app.post('/fruits', (req, res) => {
     }
 
 });
+*/
+
+
+async function get_forward_headers(req) {
+
+    incoming_headers = ['x-request-id',
+        'x-b3-traceid',
+        'x-b3-spanid',
+        'x-b3-parentspanid',
+        'x-b3-sampled',
+        'x-b3-flags',
+        'x-ot-span-context',
+        'x-datadog-trace-id',
+        'x-datadog-parent-id',
+        'x-datadog-sampled'
+    ];
+
+    var headers = {};
+    async.each(incoming_headers, (item, callback) => {
+
+        if (req.is(item)) {
+            headers[item] = req.get(item);
+            callback();
+        } else {
+            console.log("no header : " + item);
+            callback();
+        }
+
+    });
+
+    console.log(headers);
+    return headers;
+}
 
 
 /**
