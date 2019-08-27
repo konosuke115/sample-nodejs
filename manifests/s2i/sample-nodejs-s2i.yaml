@@ -89,8 +89,8 @@ items:
         - image: sample-nodejs:latest
           name: sample-nodejs
           ports:
-          - containerPort: 3000
-            protocol: TCP
+          - containerPort: 80
+            protocol: HTTP
           resources: {}
     test: false
     triggers:
@@ -123,9 +123,9 @@ items:
   spec:
     ports:
     - name: http
-      port: 3000
-      protocol: TCP
-      targetPort: 3000
+      port: 80
+      protocol: HTTP
+      targetPort: 80
     selector:
       app: sample-nodejs
       deploymentconfig: sample-nodejs
