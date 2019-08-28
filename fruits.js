@@ -24,7 +24,6 @@ var hostnames = ["apple", "strawberry", "kiwi", "pear", "pineapple", "banana", "
 app.get('/fruits', async (req, res) => {
 
     //console.log("start");
-
     headers = await get_forward_headers(req);
 
     var times;
@@ -37,33 +36,30 @@ app.get('/fruits', async (req, res) => {
     var count;
     if (req.query.count) {
         count = Number(req.query.count) + 1;
-        console.log(count);
+        //console.log(count);
     } else {
         count = 1
-        console.log(count);
+        //console.log(count);
     }
 
     if (req.query.times > 1) {
-
+        // request method
         options = {
             url: 'http://' + choose_at_random(hostnames) + ":" + port + '/fruits',
-            //url: 'http://localhost:' + port + '/fruits',
             qs: { "times": times, "count": count },
             headers: headers
         }
-
         // http get request
         request.get(options, function (error, response, body) {
             console.log(count + ": " + req.hostname);
-            res.send(count + ": " + req.hostname + "\n" + body);
+            res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
+            res.end(count + ": " + req.hostname + "\n" + body);
         })
-
     } else {
-
-        console.log(req.hostname);
-        res.send(count + ": " + req.hostname)
+        console.log(count + ": " + req.hostname);
+        res.writeHead(200, {'Content-Type': 'text/plain; charset=utf-8'});
+        res.end(count + ": " + req.hostname)
     }
-
 });
 
 /*
@@ -118,7 +114,8 @@ app.post('/fruits', (req, res) => {
 
 async function get_forward_headers(req) {
 
-    incoming_headers = ['x-request-id',
+    incoming_headers = [
+        'x-request-id',
         'x-b3-traceid',
         'x-b3-spanid',
         'x-b3-parentspanid',
