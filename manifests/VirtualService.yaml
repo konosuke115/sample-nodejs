@@ -9,8 +9,8 @@ spec:
     - '*'
   http:
     - match:
-      - uri:
-        exact: /fruits
+        - uri:
+            exact: /fruits
       route:
         - destination:
             host: sample-nodejs
